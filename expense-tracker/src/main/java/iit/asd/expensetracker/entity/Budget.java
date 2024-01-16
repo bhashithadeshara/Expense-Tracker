@@ -5,7 +5,6 @@ import iit.asd.expensetracker.util.enums.Month;
 
 import java.util.Random;
 
-
 public class Budget {
 
     private int id;

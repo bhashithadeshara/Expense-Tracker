@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface TransactionService {
 
-
     List<AccountTransaction> getAllByMonthOfYear(Month month, int year);
 
     List<AccountTransaction> getAll();
