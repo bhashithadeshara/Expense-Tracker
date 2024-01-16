@@ -3,7 +3,6 @@ package iit.asd.expensetracker.util.singleton;
 import javafx.stage.Stage;
 
 public class MainStage extends Stage {
-    // The Main Stage
     private static MainStage mainStage;
 
     private MainStage() {}
