@@ -4,7 +4,7 @@ import iit.asd.expensetracker.entity.AccountTransaction;
 import iit.asd.expensetracker.util.enums.Month;
 import java.util.List;
 
-public interface TransactionServiceDAO {
+public interface TransactionService {
 
 
     public List<AccountTransaction> getAllByMonthOfYear(Month month, int year);
