@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface BudgetService {
 
-    public List<Budget> getAll();
+    List<Budget> getAll();
 
-    public Budget getBudgetById(int id);
+    Budget getBudgetById(int id);
 
-    public void create(Budget budget);
+    void create(Budget budget);
 
-    public void update(Budget budget);
+    void update(Budget budget);
 
-    public void delete(int id);
+    void delete(int id);
 
-    public Budget getBudgetByMonthOfYearAndCategory(Month month, int year, Category category);
+    Budget getBudgetByMonthOfYearAndCategory(Month month, int year, Category category);
 
 }

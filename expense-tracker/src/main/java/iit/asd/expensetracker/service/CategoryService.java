@@ -1,20 +1,19 @@
 package iit.asd.expensetracker.service;
 
 import iit.asd.expensetracker.entity.Category;
+
 import java.util.List;
 
 public interface CategoryService {
 
-    public List<Category> getAll();
+    List<Category> getAll();
 
-    public Category getCategoryById(int id);
+    Category getCategoryById(int id);
 
+    void create(Category category);
 
-    public void create(Category category);
+    void update(Category category);
 
-
-    public void update(Category category);
-    
-    public void delete(int Id);
+    void delete(int Id);
 }
 

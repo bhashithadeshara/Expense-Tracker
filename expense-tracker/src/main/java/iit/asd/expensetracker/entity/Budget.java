@@ -9,7 +9,7 @@ import java.util.Random;
 public class Budget {
 
     private int id;
-    private  float budget;
+    private float budget;
     private Category category;
     private Month month;
     private int year;
