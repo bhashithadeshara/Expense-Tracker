@@ -3,9 +3,9 @@ package iit.asd.expensetracker.entity;
 import java.util.Random;
 
 public class Category {
-    // The id
+
     private int id;
-    // The Category name
+
     private String name;
 
     public Category(String name) {

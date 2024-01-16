@@ -1,10 +1,10 @@
 package iit.asd.expensetracker.entity;
 
 public class BudgetUpdate {
-    // The Category
+
     private String category;
-    // The amount
-    private String amount;
+
+    private String value;
 
     public String getCategory() {
         return category;
@@ -14,16 +14,16 @@ public class BudgetUpdate {
         this.category = category;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getValue() {
+        return value;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public BudgetUpdate(String category, String amount) {
         this.category = category;
-        this.amount = amount;
+        this.value = amount;
     }
 }
