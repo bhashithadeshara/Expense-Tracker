@@ -1,19 +1,18 @@
-package iit.asd.expensetracker.repository.Implementation;
+package iit.asd.expensetracker.service.impl;
 
 import iit.asd.expensetracker.entity.Budget;
 import iit.asd.expensetracker.entity.Category;
-import iit.asd.expensetracker.repository.IBudgetRepository;
+import iit.asd.expensetracker.service.BudgetService;
 import iit.asd.expensetracker.util.enums.Month;
 import iit.asd.expensetracker.util.singleton.DataStore;
 
 import java.util.List;
 
-public class BudgetRepositoryImpl implements IBudgetRepository {
+public class BudgetServiceImpl implements BudgetService {
     @Override
-    public List<Budget> getAllBudgets() {
+    public List<Budget> getAll() {
         return DataStore.getInstance().getBudgetList();
     }
-
 
     @Override
     public Budget getBudgetById(int id) {
@@ -23,47 +22,43 @@ public class BudgetRepositoryImpl implements IBudgetRepository {
                 .orElse(null);
     }
 
-
     @Override
-    public void createBudget(Budget budget) {
+    public void create(Budget budget) {
         DataStore.getInstance().getBudgetList().add(budget);
     }
 
-
     @Override
-    public void updateBudget(Budget budget) {
-        int pointerIndex = 0;
+    public void update(Budget budget) {
+        int index = 0;
 
-        for (Budget b : getAllBudgets()) {
-            if (b.getId() == budget.getId()) {
-                getAllBudgets().set(pointerIndex, budget);
+        for (Budget b: getAll()) {
+            if(b.getId() == budget.getId()) {
+                getAll().set(index, budget);
                 break;
             }
 
-            pointerIndex++;
+            index++;
         }
     }
 
-
     @Override
-    public void deleteBudget(int id) {
+    public void delete(int id) {
         List<Budget> budgets = DataStore.getInstance().getBudgetList();
-        int pointerIndex = 0;
-        for (Budget budget : budgets) {
+        int index = 0;
+        for (Budget budget: budgets) {
             if (budget.getId() == id) {
-                budgets.remove(pointerIndex);
+                budgets.remove(index);
                 break;
             }
-            pointerIndex++;
+            index++;
         }
     }
-
     @Override
-    public Budget getBudgetByDateAndCategory(int year, Month month, Category category) {
-        return getAllBudgets().stream()
+    public Budget getBudgetByMonthOfYearAndCategory(Month month, int year,Category category) {
+        return  getAll().stream()
                 .filter(o -> o.getMonth() == month)
                 .filter(o -> o.getYear() == year)
-                .filter(o -> o.getCategory() == category)
+                .filter(o-> o.getCategory() ==  category)
                 .findFirst()
                 .orElse(null);
     }

@@ -1,14 +1,14 @@
-package iit.asd.expensetracker.repository.Implementation;
+package iit.asd.expensetracker.service.impl;
 
 import iit.asd.expensetracker.entity.Category;
-import iit.asd.expensetracker.repository.ICategoryRepository;
+import iit.asd.expensetracker.service.CategoryService;
 import iit.asd.expensetracker.util.singleton.DataStore;
 
 import java.util.List;
 
-public class CategoryRepositoryImpl implements ICategoryRepository {
+public class CategoryServiceImpl implements CategoryService {
     @Override
-    public List<Category> getAllCategories() {
+    public List<Category> getAll() {
         return DataStore.getInstance().getCategoryList();
     }
 
@@ -21,34 +21,35 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
     }
 
     @Override
-    public void createCategory(Category category) {
+    public void create(Category category) {
         DataStore.getInstance().getCategoryList().add(category);
     }
 
-    @Override
-    public void updateCategory(Category category) {
-        int pointerIndex = 0;
 
-        for (Category localCategory : getAllCategories()) {
-            if (localCategory.getId() == category.getId()) {
-                getAllCategories().set(pointerIndex, category);
+    @Override
+    public void update(Category category) {
+        int index = 0;
+
+        for (Category localCategory: getAll()) {
+            if(localCategory.getId() == category.getId()) {
+                getAll().set(index, category);
                 break;
             }
 
-            pointerIndex++;
+            index++;
         }
     }
 
     @Override
-    public void deleteCategory(int id) {
+    public void delete(int id) {
         List<Category> categories = DataStore.getInstance().getCategoryList();
-        int pointerIndex = 0;
-        for (Category category : categories) {
+        int index = 0;
+        for (Category category: categories) {
             if (category.getId() == id) {
-                categories.remove(pointerIndex);
+                categories.remove(index);
                 break;
             }
-            pointerIndex++;
+            index++;
         }
     }
 
