@@ -10,6 +10,8 @@ import iit.asd.expensetracker.service.impl.TransactionServiceImpl;
 import iit.asd.expensetracker.util.enums.Month;
 import iit.asd.expensetracker.util.singleton.DataStore;
 import iit.asd.expensetracker.util.singleton.MainStage;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -311,8 +314,16 @@ public class BudgetController implements Initializable {
                 }
             }
             Budget budget = budgetService.getBudgetByMonthOfYearAndCategory(m,y,c);
-            BudgetUpdate p = new BudgetUpdate(c.getName(), df.format((amount/budget.getBudget())*100)+ " % ");
-            report.add(p);
+
+            if(budget == null){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Invalid Month and year for budget");
+                alert.setContentText("Couldn't find relevant budget for inserted month and year. Please insert another month and year");
+                alert.show();
+            }else{
+                BudgetUpdate p = new BudgetUpdate(c.getName(), df.format((amount/budget.getBudget())*100)+ " % ");
+                report.add(p);
+            }
         }
 
         return report;
