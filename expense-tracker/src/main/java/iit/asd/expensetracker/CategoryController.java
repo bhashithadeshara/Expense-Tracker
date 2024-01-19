@@ -33,30 +33,30 @@ public class CategoryController implements Initializable {
     private Button catBtnDelete;
     @FXML
     private Button catBtnClear;
-    private CategoryService categoryDAO;
+    private CategoryService categoryService;
 
     public CategoryController() {
-        categoryDAO = new CategoryServiceImpl();
+        categoryService = new CategoryServiceImpl();
     }
 
     private List<Category> getAll() {
-        return categoryDAO.getAll();
+        return categoryService.getAll();
     }
 
     private Category getById(int id) {
-        return categoryDAO.getCategoryById(id);
+        return categoryService.getCategoryById(id);
     }
 
     private void create(Category category) {
-        categoryDAO.create(category);
+        categoryService.create(category);
     }
 
     private void update(Category category) {
-        categoryDAO.update(category);
+        categoryService.update(category);
     }
 
     private void delete(int id) {
-        categoryDAO.delete(id);
+        categoryService.delete(id);
     }
 
     @Override
