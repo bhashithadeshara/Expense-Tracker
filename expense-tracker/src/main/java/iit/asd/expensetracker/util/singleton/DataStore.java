@@ -22,19 +22,19 @@ public class DataStore {
     private DataStore() {
         categoryList = new ArrayList<>();
         categoryList.add(new Category("Travel"));
-        categoryList.add(new Category("Meals"));
-        categoryList.add(new Category("Utilities"));
+        categoryList.add(new Category("Food"));
+        categoryList.add(new Category("Bills"));
 
         budgetList = new ArrayList<Budget>();
-        budgetList.add(new Budget(20000, categoryList.get(0), Month.APRIL,2024));
-        budgetList.add(new Budget(20000, categoryList.get(1), Month.APRIL,2024));
-        budgetList.add(new Budget(30000, categoryList.get(2), Month.APRIL,2024));
+        budgetList.add(new Budget(20000, categoryList.get(0), Month.APRIL,2023));
+        budgetList.add(new Budget(20000, categoryList.get(1), Month.APRIL,2023));
+        budgetList.add(new Budget(30000, categoryList.get(2), Month.APRIL,2023));
 
         transactionList = new ArrayList<>();
-        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "Family Outing", 15000.00, "Expense", categoryList.get(0), Month.MAY, 2024));
-        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_INCOME, "Commission", 25000.00, "Income", categoryList.get(1), Month.MAY, 2024));
-        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "McDonalds", 3000.00, "Expense", categoryList.get(1),  Month.MAY, 2024));
-        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "Electricity Bill", 7000.00, "Expense", categoryList.get(2), Month.MAY, 2024));
+        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "Lunch Outing", 2000.00, "Expense", categoryList.get(0), Month.APRIL, 2023));
+        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_INCOME, "Bonus", 50000.00, "Income", categoryList.get(1), Month.APRIL, 2023));
+        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "KFC", 50000.00, "Expense", categoryList.get(1),  Month.APRIL, 2023));
+        transactionList.add(TransactionFactory.createTransaction(TransactionType.ONETIME_EXPENSE, "Water Bill", 2000.00, "Expense", categoryList.get(2), Month.APRIL, 2023));
 
         monthList = new ArrayList<>();
         monthList.add(Month.JANUARY);

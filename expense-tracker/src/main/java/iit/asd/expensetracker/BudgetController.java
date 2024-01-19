@@ -53,16 +53,16 @@ public class BudgetController implements Initializable {
     private Button btnSave;
     @FXML
     private Button btnDelete;
-    private BudgetService budgetDAO;
-    private TransactionService transactionDAO;
-    private CategoryService categoryDAO;
+    private BudgetService budgetService;
+    private TransactionService transactionService;
+    private CategoryService categoryService;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
 
     public BudgetController() {
-        budgetDAO = new BudgetServiceImpl();
-        transactionDAO = new TransactionServiceImpl();
-        categoryDAO = new CategoryServiceImpl();
+        budgetService = new BudgetServiceImpl();
+        transactionService = new TransactionServiceImpl();
+        categoryService = new CategoryServiceImpl();
     }
 
 
@@ -131,13 +131,13 @@ public class BudgetController implements Initializable {
     }
 
     private boolean isValidCreate(){
-       Budget budget = budgetDAO.getBudgetByMonthOfYearAndCategory(month.getValue(), year.getValue(),budgetCategory.getValue());
+       Budget budget = budgetService.getBudgetByMonthOfYearAndCategory(month.getValue(), year.getValue(),budgetCategory.getValue());
 
         return budget == null;
     }
 
     private boolean isValid(int id) {
-        return budgetDAO.getBudgetById(id) != null;
+        return budgetService.getBudgetById(id) != null;
     }
 
     @FXML
@@ -182,15 +182,15 @@ public class BudgetController implements Initializable {
     }
 
     private  void create(Budget budget){
-        budgetDAO.create(budget);
+        budgetService.create(budget);
     }
 
     private void update(Budget budget) {
-        budgetDAO.update(budget);
+        budgetService.update(budget);
     }
 
     private void delete(int id) {
-        budgetDAO.delete(id);
+        budgetService.delete(id);
     }
 
     @FXML
@@ -252,12 +252,12 @@ public class BudgetController implements Initializable {
         category.setCellValueFactory(new PropertyValueFactory<>("category"));
 
         TableColumn<BudgetUpdate, String> columnCategory = new TableColumn<>("Progress");
-        columnCategory.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        columnCategory.setCellValueFactory(new PropertyValueFactory<>("value"));
         budgetReportTable.getColumns().addAll(category,columnCategory);
     }
 
     private void initTableData() {
-        budgetTable.setItems(FXCollections.observableArrayList(budgetDAO.getAll()));
+        budgetTable.setItems(FXCollections.observableArrayList(budgetService.getAll()));
         budgetTable.refresh();
     }
 
@@ -310,7 +310,7 @@ public class BudgetController implements Initializable {
                     }
                 }
             }
-            Budget budget = budgetDAO.getBudgetByMonthOfYearAndCategory(m,y,c);
+            Budget budget = budgetService.getBudgetByMonthOfYearAndCategory(m,y,c);
             BudgetUpdate p = new BudgetUpdate(c.getName(), df.format((amount/budget.getBudget())*100)+ " % ");
             report.add(p);
         }
@@ -323,7 +323,7 @@ public class BudgetController implements Initializable {
         String m = String.valueOf(monthBudgetProgress.getValue());
         int yearValue = Integer.parseInt(String.valueOf(yearBudgetProgress.getValue()));
 
-        List<AccountTransaction> transactions = transactionDAO.getAllByMonthOfYear(Month.valueOf(m),yearBudgetProgress.getValue());
+        List<AccountTransaction> transactions = transactionService.getAllByMonthOfYear(Month.valueOf(m),yearValue);
 
         double totalExpenditure = 0;
         for (AccountTransaction transaction: transactions) {
@@ -334,7 +334,7 @@ public class BudgetController implements Initializable {
             }
         }
 
-        List<Budget> budgets = budgetDAO.getAll();
+        List<Budget> budgets = budgetService.getAll();
 
         double totalBudget = budgets.stream()
                 .filter(o -> o.getMonth() == Month.valueOf(m))
@@ -346,7 +346,7 @@ public class BudgetController implements Initializable {
 
         overallProgress.setText(df.format(usagePercentage) + " % (" + totalExpenditure + " /" + totalBudget + ")");
 
-        List<Category> categories = categoryDAO.getAll();
+        List<Category> categories = categoryService.getAll();
 
         List<BudgetUpdate> report = this.calculateCategorizedProgress(categories, transactions,Month.valueOf(m),yearValue);
 

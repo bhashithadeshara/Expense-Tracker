@@ -36,16 +36,16 @@ public class TransactionController implements Initializable {
     // The selected transaction from table
     private AccountTransaction selectedTransaction;
     // The transaction dao
-    private TransactionService transactionDAO;
+    private TransactionService transactionService;
     // The transaction table view
     @FXML
     private TableView<AccountTransaction> transactionTable;
     // The transaction title
     @FXML
-    private TextField trxnTitle;
+    private TextField trxnSubject;
     // The amount
     @FXML
-    private TextField trxnAmount;
+    private TextField trxnValue;
     // The type
     @FXML
     private ComboBox<TransactionType> trxnType;
@@ -60,7 +60,7 @@ public class TransactionController implements Initializable {
     private ComboBox<Integer> trxnYear;
     // The notes
     @FXML
-    private TextArea trxnNotes;
+    private TextArea trxnDescription;
     // The save button
     @FXML
     private Button trxnBtnSave;
@@ -69,7 +69,7 @@ public class TransactionController implements Initializable {
     private Button trxnBtnDelete;
 
     public TransactionController() {
-        transactionDAO = new TransactionServiceImpl();
+        transactionService = new TransactionServiceImpl();
     }
 
     /**
@@ -77,7 +77,7 @@ public class TransactionController implements Initializable {
      * @return transaction list
      */
     private List<AccountTransaction> getAll() {
-        return transactionDAO.getAll();
+        return transactionService.getAll();
     }
 
     /**
@@ -85,7 +85,7 @@ public class TransactionController implements Initializable {
      * @param transaction Transaction object
      */
     private void create(AccountTransaction transaction) {
-        transactionDAO.create(transaction);
+        transactionService.create(transaction);
     }
 
     /**
@@ -93,7 +93,7 @@ public class TransactionController implements Initializable {
      * @param transaction Transaction object
      */
     private void update(AccountTransaction transaction) {
-        transactionDAO.update(transaction);
+        transactionService.update(transaction);
     }
 
     /**
@@ -101,7 +101,7 @@ public class TransactionController implements Initializable {
      * @param id: Transaction id
      */
     private void delete(int id) {
-        transactionDAO.delete(id);
+        transactionService.delete(id);
     }
 
     /**
@@ -121,7 +121,7 @@ public class TransactionController implements Initializable {
      * load Transaction table data
      */
     private void initTableData() {
-        transactionTable.setItems(FXCollections.observableArrayList(transactionDAO.getAll()));
+        transactionTable.setItems(FXCollections.observableArrayList(transactionService.getAll()));
         transactionTable.refresh();
     }
 
@@ -134,14 +134,14 @@ public class TransactionController implements Initializable {
         TableColumn<AccountTransaction, Integer> columnId = new TableColumn<>("ID");
         columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<AccountTransaction, String> columnTitle = new TableColumn<>("Title");
-        columnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        TableColumn<AccountTransaction, String> columnTitle = new TableColumn<>("Subject");
+        columnTitle.setCellValueFactory(new PropertyValueFactory<>("subject"));
 
-        TableColumn<AccountTransaction, Double> columnAmount = new TableColumn<>("Amount");
-        columnAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        TableColumn<AccountTransaction, Double> columnAmount = new TableColumn<>("Value");
+        columnAmount.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-        TableColumn<AccountTransaction, String> columnNote = new TableColumn<>("Note");
-        columnNote.setCellValueFactory(new PropertyValueFactory<>("note"));
+        TableColumn<AccountTransaction, String> columnNote = new TableColumn<>("Description");
+        columnNote.setCellValueFactory(new PropertyValueFactory<>("description"));
 
         TableColumn<AccountTransaction, Category> columnCategory = new TableColumn<>("Category");
         columnCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -356,9 +356,9 @@ public class TransactionController implements Initializable {
             if (!isUpdate) {
                 this.create(TransactionFactory.createTransaction(
                         trxnType.getValue(),
-                        trxnTitle.getText(),
-                        Double.parseDouble(trxnAmount.getText()),
-                        trxnNotes.getText(),
+                        trxnSubject.getText(),
+                        Double.parseDouble(trxnValue.getText()),
+                        trxnDescription.getText(),
                         trxnCategory.getValue(),
                         trxnMonth.getValue(),
                         trxnYear.getValue()));
@@ -367,9 +367,9 @@ public class TransactionController implements Initializable {
             } else {
                 selectedTransaction = transactionTable.getSelectionModel().getSelectedItem();
 
-                selectedTransaction.setSubject(trxnTitle.getText());
-                selectedTransaction.setValue(Double.parseDouble(trxnAmount.getText()));
-                selectedTransaction.setDescription(trxnNotes.getText());
+                selectedTransaction.setSubject(trxnSubject.getText());
+                selectedTransaction.setValue(Double.parseDouble(trxnValue.getText()));
+                selectedTransaction.setDescription(trxnDescription.getText());
                 selectedTransaction.setCategory(trxnCategory.getValue());
                 selectedTransaction.setMonth(trxnMonth.getValue());
                 selectedTransaction.setYear(trxnYear.getValue());
@@ -387,8 +387,8 @@ public class TransactionController implements Initializable {
      * @return is valid or not
      */
     private boolean isMandatoryFieldsCompleted() {
-        if (trxnTitle.getText().isEmpty()
-                || trxnAmount.getText().isEmpty()
+        if (trxnSubject.getText().isEmpty()
+                || trxnValue.getText().isEmpty()
                 || (trxnType.getValue() == null)
                 || (trxnCategory.getValue() == null)
                 || (trxnYear.getValue() == null)
@@ -399,7 +399,7 @@ public class TransactionController implements Initializable {
             alert.setContentText("Please enter a valid value to the mandatory fields!");
             alert.showAndWait();
             return false;
-        } else if (!trxnAmount.getText().matches("-?\\d+(\\.\\d+)?")) {
+        } else if (!trxnValue.getText().matches("-?\\d+(\\.\\d+)?")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Warning!");
             alert.setHeaderText("Please enter valid Amount");
@@ -435,12 +435,12 @@ public class TransactionController implements Initializable {
     protected void onClickSingleRow() {
         selectedTransaction = transactionTable.getSelectionModel().getSelectedItem();
 
-        trxnTitle.setText(selectedTransaction.getSubject());
-        trxnAmount.setText(String.valueOf(selectedTransaction.getValue()));
+        trxnSubject.setText(selectedTransaction.getSubject());
+        trxnValue.setText(String.valueOf(selectedTransaction.getValue()));
         trxnCategory.setValue(selectedTransaction.getCategory());
         trxnMonth.setValue(selectedTransaction.getMonth());
         trxnYear.setValue(selectedTransaction.getYear());
-        trxnNotes.setText(selectedTransaction.getDescription());
+        trxnDescription.setText(selectedTransaction.getDescription());
 
         if (selectedTransaction instanceof Expenditure) {
             Expenditure selectedExpense = (Expenditure) selectedTransaction;
@@ -469,14 +469,14 @@ public class TransactionController implements Initializable {
      * clear the form
      */
     private void clearForm() {
-        trxnTitle.clear();
-        trxnAmount.clear();
+        trxnSubject.clear();
+        trxnValue.clear();
         trxnType.getItems().clear();
         trxnType.setDisable(false);
         trxnCategory.getItems().clear();
         trxnMonth.getItems().clear();
         trxnYear.getItems().clear();
-        trxnNotes.clear();
+        trxnDescription.clear();
         initForm();
 
         trxnBtnSave.setText("Save");
