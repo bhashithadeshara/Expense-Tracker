@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iit.asd.expensetracker.CategoryController">
     <children>
-        <AnchorPane layoutX="2.0" layoutY="-1.0" prefHeight="320.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(to bottom, #0066CC, #66CCFF);">
+        <AnchorPane prefHeight="590.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to bottom, #000000, #bcbcbc);">
             <children>
                 <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#onClickBackBtnCategory" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -23,17 +23,17 @@
                         <Image url="@../images/wallet.png" />
                     </image>
                 </ImageView>
-                <Label alignment="CENTER" layoutX="141.0" layoutY="37.0" prefHeight="28.0" prefWidth="143.0" text="Expense Tracker" textFill="WHITE">
+                <Label alignment="CENTER" layoutX="141.0" layoutY="37.0" prefHeight="28.0" prefWidth="215.0" text="Expense Tracker" textFill="WHITE">
                     <font>
                         <Font name="Segoe UI" size="24.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="155.0" layoutY="66.0" prefHeight="18.0" prefWidth="100.0" text="Category Manager" textFill="WHITE">
+                <Label alignment="CENTER" layoutX="155.0" layoutY="66.0" prefHeight="18.0" prefWidth="150.0" text="Manage Your Categories" textFill="WHITE">
                     <font>
                         <Font name="Segoe UI" size="12.0" />
                     </font>
                 </Label>
-                <TextField fx:id="catName" layoutX="36.0" layoutY="144.0" prefHeight="32.0" prefWidth="278.0" promptText="Please enter the Name" />
+                <TextField fx:id="catName" layoutX="36.0" layoutY="144.0" prefHeight="32.0" prefWidth="278.0" promptText="The Category" />
                 <Button fx:id="catBtnSave" layoutX="36.0" layoutY="204.0" mnemonicParsing="false" onMouseClicked="#onSaveCategory" prefHeight="32.0" prefWidth="130.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-background-color: transparent;" text="Save" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />

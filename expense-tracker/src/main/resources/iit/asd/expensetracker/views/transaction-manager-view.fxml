@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iit.asd.expensetracker.TransactionController">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(to bottom, #0066CC, #66CCFF);">
+      <AnchorPane prefHeight="600.0" prefWidth="1600.0" style="-fx-background-color: linear-gradient(to bottom, #000000, #bcbcbc);">
          <children>
             <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#onClickBackBtnTransactions" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -25,23 +25,23 @@
                   <Image url="@../images/wallet.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="159.0" layoutY="64.0" prefHeight="29.0" prefWidth="120.0" text="Easy Wallet" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="159.0" layoutY="64.0" prefHeight="29.0" prefWidth="200.0" text="Expense Tracker" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="24.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="159.0" layoutY="93.0" prefHeight="18.0" prefWidth="113.0" text="Transaction Manager" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="159.0" layoutY="93.0" prefHeight="18.0" prefWidth="170.0" text="Manage Your Transactions" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="trxnSubject" layoutX="36.0" layoutY="181.0" prefHeight="32.0" prefWidth="278.0" promptText="Please enter the Subject" />
-            <TextField fx:id="trxnValue" layoutX="36.0" layoutY="219.0" prefHeight="32.0" prefWidth="278.0" promptText="Please enter the Value" />
-            <ComboBox fx:id="trxnType" editable="true" layoutX="36.0" layoutY="257.0" prefHeight="32.0" prefWidth="278.0" promptText="Please select a Type" />
-            <ComboBox fx:id="trxnCategory" editable="true" layoutX="36.0" layoutY="295.0" prefHeight="32.0" prefWidth="278.0" promptText="Please select a Category" />
+            <TextField fx:id="trxnSubject" layoutX="36.0" layoutY="181.0" prefHeight="32.0" prefWidth="278.0" promptText="The Cause" />
+            <TextField fx:id="trxnValue" layoutX="36.0" layoutY="219.0" prefHeight="32.0" prefWidth="278.0" promptText="The Value" />
+            <ComboBox fx:id="trxnType" editable="true" layoutX="36.0" layoutY="257.0" prefHeight="32.0" prefWidth="278.0" promptText="The Type" />
+            <ComboBox fx:id="trxnCategory" editable="true" layoutX="36.0" layoutY="295.0" prefHeight="32.0" prefWidth="278.0" promptText="The Category" />
             <ComboBox fx:id="trxnMonth" editable="true" layoutX="184.0" layoutY="336.0" prefHeight="32.0" prefWidth="130.0" promptText="Month" />
             <ComboBox fx:id="trxnYear" editable="true" layoutX="36.0" layoutY="336.0" prefHeight="32.0" prefWidth="130.0" promptText="Year" />
-            <TextArea fx:id="trxnDescription" layoutX="36.0" layoutY="377.0" prefHeight="75.0" prefWidth="278.0" promptText="Notes" />
+            <TextArea fx:id="trxnDescription" layoutX="36.0" layoutY="377.0" prefHeight="75.0" prefWidth="278.0" promptText="Description" />
             <Button fx:id="trxnBtnSave" layoutX="36.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#onSaveTransaction" prefHeight="32.0" prefWidth="130.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-background-color: transparent;" text="Save" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
