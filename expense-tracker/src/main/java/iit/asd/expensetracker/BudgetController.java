@@ -10,8 +10,6 @@ import iit.asd.expensetracker.service.impl.TransactionServiceImpl;
 import iit.asd.expensetracker.util.enums.Month;
 import iit.asd.expensetracker.util.singleton.DataStore;
 import iit.asd.expensetracker.util.singleton.MainStage;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +19,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -56,9 +53,9 @@ public class BudgetController implements Initializable {
     private Button btnSave;
     @FXML
     private Button btnDelete;
-    private BudgetService budgetService;
-    private TransactionService transactionService;
-    private CategoryService categoryService;
+    private final BudgetService budgetService;
+    private final TransactionService transactionService;
+    private final CategoryService categoryService;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
 
